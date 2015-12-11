@@ -148,7 +148,8 @@ exports.parseBlattspinatStation = function(req, res) {
                 fernverkehr: data['Fernverkehr'],
                 nahverkehr: data['Nahverkehr'],
                 lat: data['lat'],
-                lon: data['lon']
+                lon: data['lon'],
+                loc: [data['lon'], data['lat']]
             });
 
             station.save();

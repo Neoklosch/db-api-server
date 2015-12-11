@@ -67,6 +67,25 @@ exports.getBlattspinatStation = function(req, res) {
     });
 };
 
+exports.getBlattspinatStationByLatLon = function(req, res) {
+    if (!req.params.hasOwnProperty('lat') || !req.params.hasOwnProperty('lon')) {
+        res.sendStatus(400).end();
+        return;
+    }
+    var coords = [req.params.lon, req.params.lat],
+        distance = req.query.hasOwnProperty('distance') ? req.query.distance : 5;
+        distance /= 6371;
+    BlattspinatStation.find({
+        loc: {
+            $near: coords,
+            $maxDistance: distance
+        }
+    }, function(err, stations){
+        res.setHeader('Content-Type', 'application/json');
+        res.send(JSON.stringify(stations));
+    });
+};
+
 exports.getBlattspinatStationNodes = function(req, res) {
     BlattspinatStationNodes.find(lowerCaseParameters(req.query), function(err, stations){
         res.setHeader('Content-Type', 'application/json');

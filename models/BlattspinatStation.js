@@ -21,7 +21,11 @@ var blattspinatStationSchema = new mongoose.Schema({
     fernverkehr: Boolean,
     nahverkehr: Boolean,
     lat: String,
-    lon: String
+    lon: String,
+    loc: {
+        type: [Number],
+        index: '2d'
+    }
 });
 
 blattspinatStationSchema.pre('save', function(next) {

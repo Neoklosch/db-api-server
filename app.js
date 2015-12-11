@@ -138,6 +138,7 @@ app.get('/api/station-rni', apiController.getStationRni);
 app.get('/api/platform-rni', apiController.getPlatformRni);
 
 app.get('/api/blattspinat/station', apiController.getBlattspinatStation);
+app.get('/api/blattspinat/station/:lat/:lon', apiController.getBlattspinatStationByLatLon);
 app.get('/api/blattspinat/station-nodes', apiController.getBlattspinatStationNodes);
 
 app.get('/api/parking/cities', apiController.getParkingCities);
