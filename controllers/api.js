@@ -8,7 +8,8 @@ var Station = require('../models/Station'),
     _ = require('lodash'),
     async = require('async'),
     querystring = require('querystring'),
-    secrets = require('../config/secrets');
+    secrets = require('../config/secrets'),
+    request = require('request');
 
 /**
  * GET /api
@@ -54,4 +55,37 @@ exports.getBlattspinatStationNodes = function(req, res) {
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(stations));
     });
+};
+
+exports.getParkingCities = function(req, res) {
+    request('http://opendata.workonweb.de/api/beta/cities', function (error, response, body) {
+        res.setHeader('Content-Type', 'application/json');
+        res.send(body);
+    })
+};
+
+exports.getParkingStations = function(req, res) {
+    var getParams = '';
+    if (req.query !== {}) {
+        getParams = '?' + querystring.stringify(req.query);
+    }
+    request('http://opendata.workonweb.de/api/beta/stations' + getParams, function (error, response, body) {
+        res.setHeader('Content-Type', 'application/json');
+        res.send(body);
+    })
+};
+
+exports.getParkingOccupancy = function(req, res) {
+    request('http://opendata.workonweb.de/api/beta/occupancy', function (error, response, body) {
+        res.setHeader('Content-Type', 'application/json');
+        res.send(body);
+    })
+};
+
+exports.getParkingOccupancyParam = function(req, res) {
+    console.log(req.param('siteid'));
+    request('http://opendata.workonweb.de/api/beta/occupancy/' + req.param('siteid'), function (error, response, body) {
+        res.setHeader('Content-Type', 'application/json');
+        res.send(body);
+    })
 };
