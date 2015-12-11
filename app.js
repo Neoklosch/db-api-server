@@ -121,13 +121,17 @@ app.post('/account/profile', passportConf.isAuthenticated, userController.postUp
 app.post('/account/password', passportConf.isAuthenticated, userController.postUpdatePassword);
 app.post('/account/delete', passportConf.isAuthenticated, userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConf.isAuthenticated, userController.getOauthUnlink);
-app.get('/csvImporter', csvParserController.parseStationCsv);
+app.get('/parse/station', csvParserController.parseStation);
+app.get('/parse/blattspinat/station', csvParserController.parseBlattspinatStation);
+app.get('/parse/blattspinat/station-nodes', csvParserController.parseBlattspinatStationNodes);
 
 /**
  * API examples routes.
  */
 app.get('/api', apiController.getApi);
 app.get('/api/station', apiController.getStation);
+app.get('/api/blattspinat/station', apiController.getBlattspinatStation);
+app.get('/api/blattspinat/station-nodes', apiController.getBlattspinatStationNodes);
 
 
 /**

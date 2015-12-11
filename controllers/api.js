@@ -2,6 +2,8 @@
  * Split into declaration and initialization for better performance.
  */
 var Station = require('../models/Station'),
+    BlattspinatStation = require('../models/BlattspinatStation'),
+    BlattspinatStationNodes = require('../models/BlattspinatStationNodes'),
     _ = require('lodash'),
     async = require('async'),
     querystring = require('querystring'),
@@ -22,7 +24,21 @@ exports.getApi = function(req, res) {
  * List of all stations.
  */
 exports.getStation = function(req, res) {
-    Station.find({}, function(err, stations){
+    Station.find(req.query, function(err, stations){
+        res.setHeader('Content-Type', 'application/json');
+        res.send(JSON.stringify(stations));
+    });
+};
+
+exports.getBlattspinatStation = function(req, res) {
+    BlattspinatStation.find(req.query, function(err, stations){
+        res.setHeader('Content-Type', 'application/json');
+        res.send(JSON.stringify(stations));
+    });
+};
+
+exports.getBlattspinatStationNodes = function(req, res) {
+    BlattspinatStationNodes.find(req.query, function(err, stations){
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(stations));
     });
