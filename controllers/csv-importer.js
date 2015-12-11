@@ -1,5 +1,6 @@
 var _ = require('lodash'),
     async = require('async'),
+    Station = require('../models/Station'),
     BlattspinatStation = require('../models/BlattspinatStation'),
     BlattspinatStationNodes = require('../models/BlattspinatStationNodes'),
     secrets = require('../config/secrets'),
