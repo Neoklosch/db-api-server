@@ -9,7 +9,8 @@ var Station = require('../models/Station'),
     async = require('async'),
     querystring = require('querystring'),
     secrets = require('../config/secrets'),
-    request = require('request');
+    request = require('request'),
+    curl = require('curlrequest');
 
 /**
  * GET /api
@@ -83,9 +84,35 @@ exports.getParkingOccupancy = function(req, res) {
 };
 
 exports.getParkingOccupancyParam = function(req, res) {
-    console.log(req.param('siteid'));
     request('http://opendata.workonweb.de/api/beta/occupancy/' + req.param('siteid'), function (error, response, body) {
         res.setHeader('Content-Type', 'application/json');
         res.send(body);
     })
+};
+
+exports.getElevatorFacilities = function(req, res) {
+    curl.request({
+        url: 'http://adam.noncd.db.de/api/v1.0/facilities/'
+    }, function(err, stdout, meta) {
+        res.setHeader('Content-Type', 'application/json');
+        res.send(stdout);
+    });
+};
+
+exports.getElevatorFacilitiesParam = function(req, res) {
+    curl.request({
+        url: 'http://adam.noncd.db.de/api/v1.0/facilities/' + req.params.equipmentnumber
+    }, function(err, stdout, meta) {
+        res.setHeader('Content-Type', 'application/json');
+        res.send(stdout);
+    });
+};
+
+exports.getElevatorStationsParam = function(req, res) {
+    curl.request({
+        url: 'http://adam.noncd.db.de/api/v1.0/stations/' + req.params.stationnumber
+    }, function(err, stdout, meta) {
+        res.setHeader('Content-Type', 'application/json');
+        res.send(stdout);
+    });
 };

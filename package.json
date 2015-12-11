@@ -19,6 +19,7 @@
     "connect-mongo": "^0.8.2",
     "cookie-parser": "^1.4.0",
     "csv-parser": "^1.8.1",
+    "curlrequest": "^0.5.4",
     "errorhandler": "^1.4.2",
     "express": "^4.13.3",
     "express-flash": "^0.0.2",

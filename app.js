@@ -131,12 +131,18 @@ app.get('/parse/blattspinat/station-nodes', passportConf.isAuthenticated, csvPar
 app.get('/api', apiController.getApi);
 app.get('/api/station', apiController.getStation);
 app.get('/api/platform', apiController.getPlatform);
+
 app.get('/api/blattspinat/station', apiController.getBlattspinatStation);
 app.get('/api/blattspinat/station-nodes', apiController.getBlattspinatStationNodes);
+
 app.get('/api/parking/cities', apiController.getParkingCities);
 app.get('/api/parking/stations', apiController.getParkingStations);
 app.get('/api/parking/occupancy', apiController.getParkingOccupancy);
 app.get('/api/parking/occupancy/:siteid', apiController.getParkingOccupancyParam);
+
+app.get('/api/elevator/facilities', apiController.getElevatorFacilities);
+app.get('/api/elevator/facilities/:equipmentnumber', apiController.getElevatorFacilitiesParam);
+app.get('/api/elevator/stations/:stationnumber', apiController.getElevatorStationsParam);
 
 
 
