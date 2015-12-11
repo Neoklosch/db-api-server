@@ -29,14 +29,14 @@ exports.getApi = function(req, res) {
  * List of all stations.
  */
 exports.getStation = function(req, res) {
-    Station.find(req.query, function(err, stations){
+    Station.find(lowerCaseParameters(req.query), function(err, stations){
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(stations));
     });
 };
 
 exports.getStationRni = function(req, res) {
-    StationRni.find(req.query, function(err, stations){
+    StationRni.find(lowerCaseParameters(req.query), function(err, stations){
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(stations));
     });
@@ -47,28 +47,28 @@ exports.getStationRni = function(req, res) {
  * List of all stations.
  */
 exports.getPlatform = function(req, res) {
-    Platform.find(req.query, function(err, platform){
+    Platform.find(lowerCaseParameters(req.query), function(err, platform){
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(platform));
     });
 };
 
 exports.getPlatformRni = function(req, res) {
-    PlatformRni.find(req.query, function(err, platform){
+    PlatformRni.find(lowerCaseParameters(req.query), function(err, platform){
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(platform));
     });
 };
 
 exports.getBlattspinatStation = function(req, res) {
-    BlattspinatStation.find(req.query, function(err, stations){
+    BlattspinatStation.find(lowerCaseParameters(req.query), function(err, stations){
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(stations));
     });
 };
 
 exports.getBlattspinatStationNodes = function(req, res) {
-    BlattspinatStationNodes.find(req.query, function(err, stations){
+    BlattspinatStationNodes.find(lowerCaseParameters(req.query), function(err, stations){
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(stations));
     });
@@ -132,3 +132,11 @@ exports.getElevatorStationsParam = function(req, res) {
         res.send(stdout);
     });
 };
+
+function lowerCaseParameters(param) {
+    var searchParam = {};
+    for (var element in param) {
+        searchParam[element] = { $regex : new RegExp(param[element], "gi") };
+    }
+    return searchParam;
+}
