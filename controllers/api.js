@@ -2,7 +2,9 @@
  * Split into declaration and initialization for better performance.
  */
 var Station = require('../models/Station'),
+    StationRni = require('../models/StationRni'),
     Platform = require('../models/Platform'),
+    PlatformRni = require('../models/PlatformRni'),
     BlattspinatStation = require('../models/BlattspinatStation'),
     BlattspinatStationNodes = require('../models/BlattspinatStationNodes'),
     _ = require('lodash'),
@@ -33,12 +35,26 @@ exports.getStation = function(req, res) {
     });
 };
 
+exports.getStationRni = function(req, res) {
+    StationRni.find(req.query, function(err, stations){
+        res.setHeader('Content-Type', 'application/json');
+        res.send(JSON.stringify(stations));
+    });
+};
+
 /**
  * GET /station
  * List of all stations.
  */
 exports.getPlatform = function(req, res) {
     Platform.find(req.query, function(err, platform){
+        res.setHeader('Content-Type', 'application/json');
+        res.send(JSON.stringify(platform));
+    });
+};
+
+exports.getPlatformRni = function(req, res) {
+    PlatformRni.find(req.query, function(err, platform){
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(platform));
     });

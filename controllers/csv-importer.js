@@ -1,9 +1,11 @@
 var _ = require('lodash'),
     async = require('async'),
     Station = require('../models/Station'),
+    StationRni = require('../models/StationRni'),
     BlattspinatStation = require('../models/BlattspinatStation'),
     BlattspinatStationNodes = require('../models/BlattspinatStationNodes'),
     Platform = require('../models/Platform'),
+    PlatformRni = require('../models/PlatformRni'),
     secrets = require('../config/secrets'),
     csv = require('csv-parser'),
     fs = require('fs');
@@ -43,6 +45,36 @@ exports.parseStation = function(req, res) {
         });
 };
 
+exports.parseStationRni = function(req, res) {
+    fs.createReadStream('data/DBRNI-Uebersicht_Bahnhoefe-Stand2015-10.csv')
+        .pipe(csv({
+            separator: ';'
+        }))
+        .on('data', function(data) {
+            var station = new StationRni({
+                bfNr: data['Bf. Nr.'],
+                bundesland: data.Bundesland,
+                station: data.Station,
+                bfDsAbk: data['Bf\nDS 100\nAbk.'],
+                katVst: data['Kat.\nVst'],
+                strasse: data['Straße'],
+                plz: data.PLZ,
+                ort: data.Ort,
+                aufgabentraeger: data['Aufgabenträger'],
+                verkehrsVerb: data['Ver-\nkehrs-\nverb.'],
+                fernverkehr: data['Fern-\nverkehr'],
+                nahverkehr: data['Nah-\nverkehr']
+            });
+
+            station.save();
+        })
+        .on('finish', function() {
+            res.render('csv-importer', {
+                title: 'Import CSV Data'
+            });
+        });
+};
+
 exports.parsePlatform = function(req, res) {
     fs.createReadStream('data/DBSuS-Bahnsteigdaten-Stand2015-10.csv')
         .pipe(csv({
@@ -59,6 +91,30 @@ exports.parsePlatform = function(req, res) {
             });
 
             station.save();
+        })
+        .on('finish', function() {
+            res.render('csv-importer', {
+                title: 'Import CSV Data'
+            });
+        });
+};
+
+exports.parsePlatformRni = function(req, res) {
+    fs.createReadStream('data/DBRNI-Bahnsteigdaten-Stand2015-10.csv')
+        .pipe(csv({
+            separator: ';'
+        }))
+        .on('data', function(data) {
+            var station = new PlatformRni({
+                bfNr: data['bf_nr'],
+                bahnsteigNr: data['Bahnsteig_Nr'],
+                bahnsteigHoeheCm: data['Bahnsteig_Hoehe_cm'],
+                nettobahnsteiglaengeM: data['Nettobahnsteiglaenge_m']
+            });
+
+            station.save(function(err) {
+                if (err) console.error(err);
+            });
         })
         .on('finish', function() {
             res.render('csv-importer', {

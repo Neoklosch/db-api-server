@@ -1,12 +1,11 @@
 var mongoose = require('mongoose');
 
-var stationSchema = new mongoose.Schema({
+var stationRniSchema = new mongoose.Schema({
     bfNr: {
         type: Number,
         unique: true
     },
     bundesland: String,
-    bm: String,
     station: String,
     bfDsAbk: String,
     katVst: Number,
@@ -22,7 +21,7 @@ var stationSchema = new mongoose.Schema({
     nahverkehr: Boolean
 });
 
-stationSchema.pre('save', function(next) {
+stationRniSchema.pre('save', function(next) {
     var station = this;
 
     if (station.fernverkehr === 'ja') {
@@ -39,4 +38,4 @@ stationSchema.pre('save', function(next) {
     next();
 });
 
-module.exports = mongoose.model('Station', stationSchema);
+module.exports = mongoose.model('StationRni', stationRniSchema);

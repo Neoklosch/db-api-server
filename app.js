@@ -121,7 +121,9 @@ app.post('/account/delete', passportConf.isAuthenticated, userController.postDel
 app.get('/account/unlink/:provider', passportConf.isAuthenticated, userController.getOauthUnlink);
 
 app.get('/parse/station', passportConf.isAuthenticated, csvParserController.parseStation);
+app.get('/parse/station-rni', passportConf.isAuthenticated, csvParserController.parseStationRni);
 app.get('/parse/platform', passportConf.isAuthenticated, csvParserController.parsePlatform);
+app.get('/parse/platform-rni', passportConf.isAuthenticated, csvParserController.parsePlatformRni);
 app.get('/parse/blattspinat/station', passportConf.isAuthenticated, csvParserController.parseBlattspinatStation);
 app.get('/parse/blattspinat/station-nodes', passportConf.isAuthenticated, csvParserController.parseBlattspinatStationNodes);
 
@@ -131,6 +133,9 @@ app.get('/parse/blattspinat/station-nodes', passportConf.isAuthenticated, csvPar
 app.get('/api', apiController.getApi);
 app.get('/api/station', apiController.getStation);
 app.get('/api/platform', apiController.getPlatform);
+
+app.get('/api/station-rni', apiController.getStationRni);
+app.get('/api/platform-rni', apiController.getPlatformRni);
 
 app.get('/api/blattspinat/station', apiController.getBlattspinatStation);
 app.get('/api/blattspinat/station-nodes', apiController.getBlattspinatStationNodes);
