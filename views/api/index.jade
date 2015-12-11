@@ -1,9 +1,37 @@
 extends ../layout
 
 block content
-  h2 API Examples
-  hr
+    h2 API Examples
+    hr
 
-  .row
-    .col-sm-4
-      p work in progress
+    .row
+        h3 GET /api/
+        hr
+        p Documentation of our Deutsche Bahn api
+
+    .row
+        h3 GET /api/station/
+        hr
+        p provides the data from the DBSuS-Uebersicht_Bahnhoefe-Stand2015-10.csv as JSON
+        h4 parameters
+        p you can filter the data by passing the attribute name with the exact value to search for
+        p for example: /api/station?plz=12345&katVst=6
+        h4 example output
+
+    .row
+        h3 GET /api/blattspinat/station
+        hr
+        p provides the data from the blattspinat stations_with_coordinates_v1.csv as JSON
+        p for more informations check out the awesome project from http://blattspinat.com/index.php/posts/bahnroulette
+        h4 parameters
+        p you can filter the data by passing the attribute name with the exact value to search for
+        p for example: /api/blattspinat/station?ort=Hamburg&bahnhofskategorie=6
+
+    .row
+        h3 GET /api/blattspinat/station-nodes
+        hr
+        p provides the data from the blattspinat BahnhoefeNeu.csv as JSON
+        p for more informations check out the awesome project from http://blattspinat.com/index.php/posts/bahnroulette
+        h4 parameters
+        p you can filter the data by passing the attribute name with the exact value to search for
+        p for example: /api/blattspinat/station-nodes?bahnhofsId=SNode-1470523
