@@ -112,8 +112,6 @@ app.get('/forgot', userController.getForgot);
 app.post('/forgot', userController.postForgot);
 app.get('/reset/:token', userController.getReset);
 app.post('/reset/:token', userController.postReset);
-app.get('/signup', userController.getSignup);
-app.post('/signup', userController.postSignup);
 app.get('/contact', contactController.getContact);
 app.post('/contact', contactController.postContact);
 app.get('/account', passportConf.isAuthenticated, userController.getAccount);
@@ -121,9 +119,10 @@ app.post('/account/profile', passportConf.isAuthenticated, userController.postUp
 app.post('/account/password', passportConf.isAuthenticated, userController.postUpdatePassword);
 app.post('/account/delete', passportConf.isAuthenticated, userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConf.isAuthenticated, userController.getOauthUnlink);
-app.get('/parse/station', csvParserController.parseStation);
-app.get('/parse/blattspinat/station', csvParserController.parseBlattspinatStation);
-app.get('/parse/blattspinat/station-nodes', csvParserController.parseBlattspinatStationNodes);
+
+app.get('/parse/station', passportConf.isAuthenticated, csvParserController.parseStation);
+app.get('/parse/blattspinat/station', passportConf.isAuthenticated, csvParserController.parseBlattspinatStation);
+app.get('/parse/blattspinat/station-nodes', passportConf.isAuthenticated, csvParserController.parseBlattspinatStationNodes);
 
 /**
  * API examples routes.
