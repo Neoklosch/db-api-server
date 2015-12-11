@@ -28,6 +28,24 @@ block content
         h4 example output
 
     .row
+        h3 GET /api/station-rni/
+        hr
+        p provides the data from the DBRNI-Bahnsteigdaten-Stand2015-10.csv as JSON
+        h4 parameters
+        p you can filter the data by passing the attribute name with the exact value to search for
+        p for example: /api/station-rni?plz=12345&katVst=6
+        h4 example output
+
+    .row
+        h3 GET /api/platform-rni/
+        hr
+        p provides the data from the DBRNI-Uebersicht_Bahnhoefe-Stand2015-10.csv as JSON
+        h4 parameters
+        p you can filter the data by passing the attribute name with the exact value to search for
+        p for example: /api/platform-rni?bahnsteig=B01&bfNr=119
+        h4 example output
+
+    .row
         h3 GET /api/blattspinat/station/
         hr
         p provides the data from the blattspinat stations_with_coordinates_v1.csv as JSON
@@ -78,7 +96,7 @@ block content
 
     .row
         h3 GET /api/elevator/
-        p we also wrap the Deutsche Bank Elevator (Alpha) 
+        p we also wrap the Deutsche Bank Elevator (Alpha)
 
     .row
         h3 GET /api/elevator/facilities/
