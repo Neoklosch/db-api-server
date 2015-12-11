@@ -27,6 +27,7 @@ var express = require('express');
     userController = require('./controllers/user'),
     apiController = require('./controllers/api'),
     contactController = require('./controllers/contact'),
+    csvParserController = require('./controllers/csv-importer'),
 
     /**
      * API keys and Passport configuration.
@@ -120,11 +121,13 @@ app.post('/account/profile', passportConf.isAuthenticated, userController.postUp
 app.post('/account/password', passportConf.isAuthenticated, userController.postUpdatePassword);
 app.post('/account/delete', passportConf.isAuthenticated, userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConf.isAuthenticated, userController.getOauthUnlink);
+app.get('/csvImporter', csvParserController.parseStationCsv);
 
 /**
  * API examples routes.
  */
 app.get('/api', apiController.getApi);
+app.get('/api/station', apiController.getStation);
 
 
 /**
