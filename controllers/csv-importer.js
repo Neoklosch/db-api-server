@@ -3,6 +3,7 @@ var _ = require('lodash'),
     Station = require('../models/Station'),
     BlattspinatStation = require('../models/BlattspinatStation'),
     BlattspinatStationNodes = require('../models/BlattspinatStationNodes'),
+    Platform = require('../models/Platform'),
     secrets = require('../config/secrets'),
     csv = require('csv-parser'),
     fs = require('fs');
@@ -31,6 +32,30 @@ exports.parseStation = function(req, res) {
                 verkehrsVerb: data['Ver-\nkehrs-\nverb.'],
                 fernverkehr: data['Fern-\nverkehr'],
                 nahverkehr: data['Nah-\nverkehr']
+            });
+
+            station.save();
+        })
+        .on('finish', function() {
+            res.render('csv-importer', {
+                title: 'Import CSV Data'
+            });
+        });
+};
+
+exports.parsePlatform = function(req, res) {
+    fs.createReadStream('data/DBSuS-Bahnsteigdaten-Stand2015-10.csv')
+        .pipe(csv({
+            separator: ';'
+        }))
+        .on('data', function(data) {
+            var station = new Platform({
+                bfNr: data['bf_nr'],
+                bahnsteig: data['bahnsteig'],
+                bahnsteigkanteBwAufBs: data['bahnsteigkante_bw_auf_bs'],
+                oertlicheBezeichnung: data['örtliche_bezeichnung'],
+                nettobaulaengenM: data['nettobaulängen_m'],
+                hoeheBahnsteigkanteCm: data['höhe_bahnsteigkante_cm']
             });
 
             station.save();
