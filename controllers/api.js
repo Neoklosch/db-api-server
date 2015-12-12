@@ -30,6 +30,7 @@ exports.getApi = function(req, res) {
  */
 exports.getStation = function(req, res) {
     Station.find(lowerCaseParameters(req.query), function(err, stations){
+        res.header("Access-Control-Allow-Origin", "*");
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(stations));
     });
@@ -37,6 +38,7 @@ exports.getStation = function(req, res) {
 
 exports.getStationRni = function(req, res) {
     StationRni.find(lowerCaseParameters(req.query), function(err, stations){
+        res.header("Access-Control-Allow-Origin", "*");
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(stations));
     });
@@ -48,6 +50,7 @@ exports.getStationRni = function(req, res) {
  */
 exports.getPlatform = function(req, res) {
     Platform.find(lowerCaseParameters(req.query), function(err, platform){
+        res.header("Access-Control-Allow-Origin", "*");
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(platform));
     });
@@ -55,6 +58,7 @@ exports.getPlatform = function(req, res) {
 
 exports.getPlatformRni = function(req, res) {
     PlatformRni.find(lowerCaseParameters(req.query), function(err, platform){
+        res.header("Access-Control-Allow-Origin", "*");
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(platform));
     });
@@ -62,6 +66,7 @@ exports.getPlatformRni = function(req, res) {
 
 exports.getBlattspinatStation = function(req, res) {
     BlattspinatStation.find(lowerCaseParameters(req.query), function(err, stations){
+        res.header("Access-Control-Allow-Origin", "*");
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(stations));
     });
@@ -81,6 +86,7 @@ exports.getBlattspinatStationByLatLon = function(req, res) {
             $maxDistance: distance
         }
     }, function(err, stations){
+        res.header("Access-Control-Allow-Origin", "*");
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(stations));
     });
@@ -95,6 +101,7 @@ exports.getBlattspinatStationNodes = function(req, res) {
 
 exports.getParkingCities = function(req, res) {
     request('http://opendata.workonweb.de/api/beta/cities', function (error, response, body) {
+        res.header("Access-Control-Allow-Origin", "*");
         res.setHeader('Content-Type', 'application/json');
         res.send(body);
     })
@@ -106,6 +113,7 @@ exports.getParkingStations = function(req, res) {
         getParams = '?' + querystring.stringify(req.query);
     }
     request('http://opendata.workonweb.de/api/beta/stations' + getParams, function (error, response, body) {
+        res.header("Access-Control-Allow-Origin", "*");
         res.setHeader('Content-Type', 'application/json');
         res.send(body);
     })
@@ -113,6 +121,7 @@ exports.getParkingStations = function(req, res) {
 
 exports.getParkingOccupancy = function(req, res) {
     request('http://opendata.workonweb.de/api/beta/occupancy', function (error, response, body) {
+        res.header("Access-Control-Allow-Origin", "*");
         res.setHeader('Content-Type', 'application/json');
         res.send(body);
     })
@@ -120,6 +129,7 @@ exports.getParkingOccupancy = function(req, res) {
 
 exports.getParkingOccupancyParam = function(req, res) {
     request('http://opendata.workonweb.de/api/beta/occupancy/' + req.param('siteid'), function (error, response, body) {
+        res.header("Access-Control-Allow-Origin", "*");
         res.setHeader('Content-Type', 'application/json');
         res.send(body);
     })
@@ -129,6 +139,7 @@ exports.getElevatorFacilities = function(req, res) {
     curl.request({
         url: 'http://adam.noncd.db.de/api/v1.0/facilities/'
     }, function(err, stdout, meta) {
+        res.header("Access-Control-Allow-Origin", "*");
         res.setHeader('Content-Type', 'application/json');
         res.send(stdout);
     });
@@ -138,6 +149,7 @@ exports.getElevatorFacilitiesParam = function(req, res) {
     curl.request({
         url: 'http://adam.noncd.db.de/api/v1.0/facilities/' + req.params.equipmentnumber
     }, function(err, stdout, meta) {
+        res.header("Access-Control-Allow-Origin", "*");
         res.setHeader('Content-Type', 'application/json');
         res.send(stdout);
     });
@@ -147,6 +159,7 @@ exports.getElevatorStationsParam = function(req, res) {
     curl.request({
         url: 'http://adam.noncd.db.de/api/v1.0/stations/' + req.params.stationnumber
     }, function(err, stdout, meta) {
+        res.header("Access-Control-Allow-Origin", "*");
         res.setHeader('Content-Type', 'application/json');
         res.send(stdout);
     });
