@@ -62,3 +62,14 @@ footer {
 .fa {
   margin-right: 6px;
 }
+
+.navbar-brand {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.navbar-brand img {
+    height: 24px;
+    width: 24px;
+}
