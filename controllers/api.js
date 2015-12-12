@@ -155,7 +155,13 @@ exports.getElevatorStationsParam = function(req, res) {
 function lowerCaseParameters(param) {
     var searchParam = {};
     for (var element in param) {
-        searchParam[element] = { $regex : new RegExp(param[element], "gi") };
+        if (param[element] % 1 === 0) {
+            searchParam[element] = param[element];
+        } else {
+            searchParam[element] = {
+                $regex : new RegExp(param[element], "gi")
+            };
+        }
     }
     return searchParam;
 }
