@@ -14,21 +14,13 @@ Deutsche Bahn API Server
 
 # Install
 
-At first you have to install mongodb.
-Check out the mongodb manual for that:
-https://docs.mongodb.org/manual
-
-You have also to install node.js.
-Check out the manual if you need help:
-https://nodejs.org/
-
 Than you only have to execute:
 
 `npm install`
 
 and also nodemon
 
-`npm nodemon`
+`npm -g nodemon`
 
 # Starting
 
@@ -42,14 +34,14 @@ After that you can start the node project himself
 
 Now you can view your page
 
-http://localhost:3000
+[http://localhost:3000](http://localhost:3000)
 
 # Documentation
 
 To parse the data you can enter the parse pages:
 
-http://localhost:3000/parse/
+[http://localhost:3000/parse/](http://localhost:3000/parse/)
 
 And the documentation for the api calls you view at:
 
-http://localhost:3000/api/
+[http://localhost:3000/api/](http://localhost:3000/api/)
