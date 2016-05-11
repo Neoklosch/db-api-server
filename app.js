@@ -19,6 +19,8 @@ var express = require('express');
     passport = require('passport'),
     expressValidator = require('express-validator'),
     sass = require('node-sass-middleware'),
+    https = require('https'),
+    fs = require('fs'),
 
     /**
      * Controllers (route handlers).
@@ -52,7 +54,7 @@ mongoose.connection.on('error', function() {
 /**
  * Express configuration.
  */
-app.set('port', process.env.PORT || 80);
+app.set('port', process.env.PORT || 443);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.use(compress());
@@ -160,7 +162,14 @@ app.use(errorHandler());
 /**
  * Start Express server.
  */
-app.listen(app.get('port'), function() {
+
+var credentials = {
+    key: fs.readFileSync('https/dbkonnektor.dbhackathon.de/key.pem'),
+    cert: fs.readFileSync('https/dbkonnektor.dbhackathon.de/cert.pem'),
+    ca: fs.readFileSync('https/dbkonnektor.dbhackathon.de/chain.pem')
+};
+var httpsServer = https.createServer(credentials, app);
+httpsServer.listen(app.get('port'), function() {
     console.log('Express server listening on port %d in %s mode', app.get('port'), app.get('env'));
 });
 
