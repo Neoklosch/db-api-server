@@ -19,6 +19,7 @@ var express = require('express');
     passport = require('passport'),
     expressValidator = require('express-validator'),
     sass = require('node-sass-middleware'),
+    http = require('http'),
     https = require('https'),
     fs = require('fs'),
 
@@ -172,5 +173,10 @@ var httpsServer = https.createServer(credentials, app);
 httpsServer.listen(app.get('port'), function() {
     console.log('Express server listening on port %d in %s mode', app.get('port'), app.get('env'));
 });
+
+http.createServer(function (req, res) {
+    res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
+    res.end();
+}).listen(80);
 
 module.exports = app;
